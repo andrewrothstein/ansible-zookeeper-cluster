@@ -1,0 +1,47 @@
+# The number of milliseconds of each tick
+tickTime={{zookeeper_tick_time}}
+# The number of ticks that the initial 
+# synchronization phase can take
+initLimit={{zookeeper_init_limit}}
+# The number of ticks that can pass between 
+# sending a request and getting an acknowledgement
+syncLimit={{zookeeper_sync_limit}}
+# the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just 
+# example sakes.
+dataDir={{zookeeper_data_dir}}
+dataLogDir={{zookeeper_data_logdir}}
+# the port at which the clients will connect
+clientPort={{zookeeper_client_port}}
+# the maximum number of client connections.
+# increase this if you need to handle more clients
+maxClientCnxns={{zookeeper_max_client_cnxns}}
+#
+# Be sure to read the maintenance section of the 
+# administrator guide before turning on autopurge.
+#
+# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
+#
+# The number of snapshots to retain in dataDir
+#autopurge.snapRetainCount=3
+# Purge task interval in hours
+# Set to "0" to disable auto purge feature
+#autopurge.purgeInterval=1
+
+
+
+{% if zookeeper_peer_type == 'observer' %}
+peerType={{zookeeper_peer_type}}
+{% endif %}
+
+{% if zookeeper_member_count > 0 %}
+{% for member_id in range(1,zookeeper_member_count+1) %}
+server.{{member_id}}={{zookeeper_member_prefix}}{{member_id}}:{{zookeeper_peer_port}}:{{zookeeper_election_port}}
+{% endfor %}
+{% endif %}
+
+{% if zookeeper_observer_count > 0 %}
+{% for observer_id in range(1,zookeeper_observer_count+1) %}
+server.{{observer_id}}={{zookeeper_observer_prefix}}{{observer_id}}:{{zookeeper_peer_port}}:{{zookeeper_election_port}}
+{% endif %}
+{% endif %}

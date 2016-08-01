@@ -1,0 +1,25 @@
+---
+galaxy_info:
+  author: Andrew Rothstein
+  description: configures as either a quorum member or a proxy
+  company: BlackRock
+  license:
+    - MIT
+  min_ansible_version: 2.0
+  platforms:
+    - name: EL
+      versions:
+        - 7
+    - name: Fedora
+      versions:
+        - 23
+    - name: Ubuntu
+      versions:
+        - xenial
+  galaxy_tags:
+    - development
+
+dependencies:
+  - role: andrewrothstein.zookeeper
+    version: v1.0.0
+  

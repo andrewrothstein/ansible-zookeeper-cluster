@@ -1,0 +1,4 @@
+---
+zookeeper_conf_dir : '{{zookeeper_home}}/{{zookeeper_name}}/{{zookeeper_conf_subdir}}'
+zookeeper_data_dir : '{{zookeeper_home}}/{{zookeeper_name}}/{{zookeeper_data_subdir}}'
+zookeeper_logdata_dir: '{{zookeeper_home}}/{{zookeeper_name}}/{{zookeeper_datalog_subdir}}'

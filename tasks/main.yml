@@ -1,0 +1,12 @@
+---
+- name: configure...
+  become: yes
+  become: '{{zookeeper_user}}'
+  with_items:
+    - myid
+    - zoo.cfg
+    - log4j.properties
+  template: >-
+    src=conf/{{item}}.j2
+    dest={{zookeeper_conf_dir}}/{{item}}
+    
