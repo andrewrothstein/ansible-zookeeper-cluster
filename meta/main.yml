@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Andrew Rothstein
-  description: configures as either a quorum member or a proxy
+  description: configures a cluster of zookeeper quorum/observers
   company: BlackRock
   license:
     - MIT

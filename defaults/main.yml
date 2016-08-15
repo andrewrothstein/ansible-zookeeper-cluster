@@ -10,13 +10,7 @@ zookeeper_data_subdir: data
 zookeeper_datalog_subdir: data-log
 zookeeper_max_client_cnxns: 60
 
-zookeeper_member_count: 1
-zookeeper_member_prefix: zookeeper-member-
-
-zookeeper_observer_count: 0
-zookeeper_observer_prefix: zookeeper-observer-
-
-zookeeper_peer_type: quorum
-# for making an observer
-#zookeeper_peer_type: observer
+zookeeper_network_iface: eth0
+zookeeper_quorum_group_name: zookeeper-quorum
+zookeeper_observer_group_name: zookeeper-observer
 

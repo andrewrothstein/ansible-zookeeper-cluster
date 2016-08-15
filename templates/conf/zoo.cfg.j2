@@ -28,20 +28,13 @@ maxClientCnxns={{zookeeper_max_client_cnxns}}
 # Set to "0" to disable auto purge feature
 #autopurge.purgeInterval=1
 
-
-
-{% if zookeeper_peer_type == 'observer' %}
-peerType={{zookeeper_peer_type}}
+{% if inventory_hostname in groups[zookeeper_observer_group_name] %}
+peerType=observer
 {% endif %}
 
-{% if zookeeper_member_count > 0 %}
-{% for member_id in range(1,zookeeper_member_count+1) %}
-server.{{member_id}}={{zookeeper_member_prefix}}{{member_id}}:{{zookeeper_peer_port}}:{{zookeeper_election_port}}
+{% for host in groups[zookeeper_quorum_group_name] %}
+server.{{hostvars[host]['zookeeper_myid']}}={{hostvars[host]['ansible_' + hostvars[host]['zookeeper_network_iface']]['ipv4']['address']}}:{{zookeeper_peer_port}}:{{zookeeper_election_port}}
 {% endfor %}
-{% endif %}
-
-{% if zookeeper_observer_count > 0 %}
-{% for observer_id in range(1,zookeeper_observer_count+1) %}
-server.{{observer_id}}={{zookeeper_observer_prefix}}{{observer_id}}:{{zookeeper_peer_port}}:{{zookeeper_election_port}}
-{% endif %}
-{% endif %}
+{% for host in groups[zookeeper_observer_group_name] %}
+server.{{hostvars[host]['zookeeper_myid']}}={{hostvars[host]['ansible_' + hostvars[host]['zookeeper_network_iface']]['ipv4']['address']}}:{{zookeeper_peer_port}}:{{zookeeper_election_port}}:observer
+{% endfor %}
