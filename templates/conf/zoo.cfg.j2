@@ -34,4 +34,5 @@ peerType=observer
 
 {% for host in groups[zookeeper_group_name] %}
 server.{{hostvars[host]['zookeeper_myid']}}={{hostvars[host]['ansible_' + zookeeper_network_iface]['ipv4']['address']}}:{{zookeeper_peer_port|default(2888)}}:{{zookeeper_election_port|default(3888)}}{% if not host in groups[zookeeper_quorum_group_name] %}:observer{% endif %}
+
 {% endfor %}

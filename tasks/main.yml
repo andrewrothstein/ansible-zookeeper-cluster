@@ -3,10 +3,20 @@
   become: yes
   become_user: '{{zookeeper_user}}'
   with_items:
-    - myid
     - zoo.cfg
     - log4j.properties
   template: >-
     src=conf/{{item}}.j2
     dest={{zookeeper_conf_dir}}/{{item}}
     
+- name: configure...
+  become: yes
+  become_user: '{{zookeeper_user}}'
+  with_items:
+    - myid
+  template: >-
+    src=data/{{item}}.j2
+    dest={{zookeeper_data_dir}}/{{item}}
+    
+- name: configurating init system
+  include: '{{zookeeper_init_system|default(systemd)}}.yml'
