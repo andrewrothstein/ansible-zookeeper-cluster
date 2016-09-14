@@ -10,7 +10,7 @@ syncLimit={{zookeeper_sync_limit|default(5)}}
 # do not use /tmp for storage, /tmp here is just 
 # example sakes.
 dataDir={{zookeeper_data_dir}}
-dataLogDir={{zookeeper_data_logdir}}
+dataLogDir={{zookeeper_datalog_dir}}
 # the port at which the clients will connect
 clientPort={{zookeeper_client_port|default(2181)}}
 # the maximum number of client connections.
@@ -28,10 +28,10 @@ maxClientCnxns={{zookeeper_max_client_cnxns|default(60)}}
 # Set to "0" to disable auto purge feature
 #autopurge.purgeInterval=1
 
-{% if inventory_hostname in groups[zookeeper_observer_group_name] %}
+{% if not inventory_hostname in groups[zookeeper_quorum_group_name] %}
 peerType=observer
 {% endif %}
 
 {% for host in groups[zookeeper_group_name] %}
-server.{{hostvars[host]['zookeeper_myid']}}={{hostvars[host]['ansible_' + zookeeper_network_iface]]['ipv4']['address']}}:{{zookeeper_peer_port|default(2888)}}:{{zookeeper_election_port|default(3888)}}{% if host not in groups[zookeeper_quorum_group_name] %}:observer{% endif %}
+server.{{hostvars[host]['zookeeper_myid']}}={{hostvars[host]['ansible_' + zookeeper_network_iface]['ipv4']['address']}}:{{zookeeper_peer_port|default(2888)}}:{{zookeeper_election_port|default(3888)}}{% if not host in groups[zookeeper_quorum_group_name] %}:observer{% endif %}
 {% endfor %}

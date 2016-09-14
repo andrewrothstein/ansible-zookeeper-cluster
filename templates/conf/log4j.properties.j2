@@ -59,4 +59,4 @@ log4j.appender.TRACEFILE.layout.ConversionPattern=%d{ISO8601} [myid:%X{myid}] - 
 
 {% for l in zookeeper_log4j_conf|default([]) %}
 {{l}}
-{% endif %}
+{% endfor %}
