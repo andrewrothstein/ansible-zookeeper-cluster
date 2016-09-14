@@ -1,7 +1,7 @@
 ---
 - name: configure...
   become: yes
-  become: '{{zookeeper_user}}'
+  become_user: '{{zookeeper_user}}'
   with_items:
     - myid
     - zoo.cfg
