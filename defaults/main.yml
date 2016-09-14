@@ -11,6 +11,9 @@ zookeeper_datalog_subdir: data-log
 zookeeper_max_client_cnxns: 60
 
 zookeeper_network_iface: eth0
+zookeeper_group_name: zookeeper
 zookeeper_quorum_group_name: zookeeper-quorum
-zookeeper_observer_group_name: zookeeper-observer
 
+# to inject log4j configs into the zk config
+#zookeeper_log4j_conf:
+#  - rootLogger.level = info
