@@ -8,6 +8,14 @@
   template: >-
     src=conf/{{item}}.j2
     dest={{zookeeper_conf_dir}}/{{item}}
+
+- name: ensure the data subdir exists
+  become: yes
+  become_user: '{{zookeeper_user}}'
+  file: >-
+    path={{zookeeper_data_dir}}
+    state=directory
+    mode=0700
     
 - name: configure...
   become: yes
