@@ -1,21 +1,21 @@
 # The number of milliseconds of each tick
-tickTime={{zookeeper_tick_time}}
+tickTime={{zookeeper_tick_time|default(2000)}}
 # The number of ticks that the initial 
 # synchronization phase can take
-initLimit={{zookeeper_init_limit}}
+initLimit={{zookeeper_init_limit|default(10)}}
 # The number of ticks that can pass between 
 # sending a request and getting an acknowledgement
-syncLimit={{zookeeper_sync_limit}}
+syncLimit={{zookeeper_sync_limit|default(5)}}
 # the directory where the snapshot is stored.
 # do not use /tmp for storage, /tmp here is just 
 # example sakes.
 dataDir={{zookeeper_data_dir}}
 dataLogDir={{zookeeper_data_logdir}}
 # the port at which the clients will connect
-clientPort={{zookeeper_client_port}}
+clientPort={{zookeeper_client_port|default(2181)}}
 # the maximum number of client connections.
 # increase this if you need to handle more clients
-maxClientCnxns={{zookeeper_max_client_cnxns}}
+maxClientCnxns={{zookeeper_max_client_cnxns|default(60)}}
 #
 # Be sure to read the maintenance section of the 
 # administrator guide before turning on autopurge.
@@ -33,8 +33,8 @@ peerType=observer
 {% endif %}
 
 {% for host in groups[zookeeper_quorum_group_name] %}
-server.{{hostvars[host]['zookeeper_myid']}}={{hostvars[host]['ansible_' + hostvars[host]['zookeeper_network_iface']]['ipv4']['address']}}:{{zookeeper_peer_port}}:{{zookeeper_election_port}}
+server.{{hostvars[host]['zookeeper_myid']}}={{hostvars[host]['ansible_' + zookeeper_network_iface]]['ipv4']['address']}}:{{zookeeper_peer_port|default(2888)}}:{{zookeeper_election_port|default(3888)}}
 {% endfor %}
 {% for host in groups[zookeeper_observer_group_name] %}
-server.{{hostvars[host]['zookeeper_myid']}}={{hostvars[host]['ansible_' + hostvars[host]['zookeeper_network_iface']]['ipv4']['address']}}:{{zookeeper_peer_port}}:{{zookeeper_election_port}}:observer
+server.{{hostvars[host]['zookeeper_myid']}}={{hostvars[host]['ansible_' + zookeeper_network_iface]]['ipv4']['address']}}:{{zookeeper_peer_port}}:{{zookeeper_election_port}}:observer
 {% endfor %}
