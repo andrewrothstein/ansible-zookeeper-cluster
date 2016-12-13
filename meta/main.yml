@@ -9,17 +9,19 @@ galaxy_info:
   platforms:
     - name: EL
       versions:
-        - 7
+        - all
     - name: Fedora
       versions:
-        - 23
+        - all
     - name: Ubuntu
       versions:
-        - xenial
+        - all
   galaxy_tags:
-    - development
+    - zookeeper
+    - consensus
+    - distributed transaction processing
 
 dependencies:
   - role: andrewrothstein.zookeeper
-    version: v1.0.5
+    version: v2.0.0
   

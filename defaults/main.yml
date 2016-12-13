@@ -15,9 +15,9 @@ zookeeper_group_name: zookeeper
 zookeeper_quorum_group_name: zookeeper-quorum
 
 zookeeper_init_system: systemd
-zookeeper_user: zookeeper
-zookeeper_home: /var/zookeeper
+zookeeper_dir: /usr/local/zookeeper
 zookeeper_launch: true
+
 # to inject log4j configs into the zk config
 #zookeeper_log4j_conf:
 #  - rootLogger.level = info

@@ -1,7 +1,7 @@
 ---
 - name: configure...
   become: yes
-  become_user: '{{zookeeper_user}}'
+  become_user: root
   with_items:
     - zoo.cfg
     - log4j.properties
@@ -11,7 +11,7 @@
 
 - name: ensure the data subdir exists
   become: yes
-  become_user: '{{zookeeper_user}}'
+  become_user: root
   file: >-
     path={{zookeeper_data_dir}}
     state=directory
@@ -19,7 +19,7 @@
     
 - name: configure...
   become: yes
-  become_user: '{{zookeeper_user}}'
+  become_user: root
   with_items:
     - myid
   template: >-

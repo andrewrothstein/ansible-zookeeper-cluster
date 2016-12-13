@@ -5,9 +5,8 @@ Requires=network.target
 After=network.target
 
 [Service]
-User={{zookeeper_user}}
 Type=simple
-ExecStart={{zookeeper_home}}/zookeeper/bin/zkServer.sh start-foreground
+ExecStart={{zookeeper_dir}}/bin/zkServer.sh start-foreground
 Restart=on-failure
 
 [Install]

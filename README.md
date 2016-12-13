@@ -10,22 +10,23 @@ Assumption is that all hosts in the zookeeper group but not in the zookeeper-quo
 Requirements
 ------------
 
-See [meta/main.yml]
+See [meta/main.yml](meta/main.yml)
 
 Role Variables
 --------------
 
-See [defaults/main.yml]
+See [defaults/main.yml](defaults/main.yml)
 
 Dependencies
 ------------
 
-See [meta/main.yml]
+See [meta/main.yml](meta/main.yml)
 
 Example Inventory/Playbook
 ----------------
 
 inventory.ini
+```ini
 [zookeeper]
 host1 zookeeper_myid=1
 host2 zookeeper_myid=2
@@ -35,11 +36,14 @@ hostN zookeeper_myid=N
 
 [zookeeper-quorum]
 host[1:7]
+```
 
 playbook.yml
-    - hosts: zookeeper
-      roles:
-         - andrewrothstein.zookeeper-cluster
+```yml
+- hosts: zookeeper
+  roles:
+    - andrewrothstein.zookeeper-cluster
+```
 
 License
 -------
@@ -49,4 +53,4 @@ MIT
 Author Information
 ------------------
 
-Andrew Rothstein andrew.rothstein@gmail.com
+Andrew Rothstein <andrew.rothstein@gmail.com>
