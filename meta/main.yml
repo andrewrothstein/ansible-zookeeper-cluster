@@ -23,5 +23,5 @@ galaxy_info:
 
 dependencies:
   - role: andrewrothstein.zookeeper
-    version: v2.0.0
+    version: v2.0.1
   
