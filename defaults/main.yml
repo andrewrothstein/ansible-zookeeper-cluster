@@ -18,7 +18,7 @@ zookeeper_quorum_group_name: zookeeper-quorum
 
 zookeeper_init_system: systemd
 zookeeper_dir: /usr/local/zookeeper
-zookeeper_launch: true
+zookeeper_launch: True
 
 # to inject log4j configs into the zk config
 #zookeeper_log4j_conf:
