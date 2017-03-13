@@ -10,7 +10,7 @@ zookeeper_data_subdir: data
 zookeeper_datalog_subdir: data-log
 zookeeper_max_client_cnxns: 60
 
-zookeeper_useips: False
+zookeeper_use_ips: False
 zookeeper_network_iface: eth0
 
 zookeeper_group_name: zookeeper
