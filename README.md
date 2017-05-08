@@ -1,5 +1,6 @@
 andrewrothstein.zookeeper-cluster
 =================================
+[![Build Status](https://travis-ci.org/andrewrothstein/ansible-zookeeper-cluster.svg?branch=master)](https://travis-ci.org/andrewrothstein/ansible-zookeeper-cluster)
 
 Configures a zookeeper cluster. Assumes there are two groups:
 * zookeeper: all zookeeper hosts voting or not
