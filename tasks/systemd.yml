@@ -3,12 +3,13 @@
   become: yes
   become_user: root
   with_items:
-    - etc/systemd/system/zookeeper.service
+    - f: zookeeper.service
+      d: /etc/systemd/system
   register: zookeeper_service_installed
   template:
-    src: '{{item}}.j2'
-    dest: /{{item}}
-    mode: 0644
+    src: '{{item.f}}.j2'
+    dest: '{{item.d}}/{{item.f}}'
+    mode: '{{item.m|default("0644")}}'
 
 - name: systemctl daemon-reload
   become: yes
