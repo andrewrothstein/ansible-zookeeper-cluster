@@ -6,7 +6,7 @@ After=network.target
 
 [Service]
 Type=simple
-EnvironmentFile=-/usr/local/java/oracle-java.env
+EnvironmentFile=-/usr/local/java/java-oracle.env
 EnvironmentFile=-/usr/local/java/oracle-jre.env
 ExecStart={{zookeeper_dir}}/bin/zkServer.sh start-foreground
 Restart=on-failure
