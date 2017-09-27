@@ -23,4 +23,4 @@
     mode: '{{item.m|default("0644")}}'
 
 - name: configurating init system
-  include: '{{zookeeper_init_system|default(systemd)}}.yml'
+  include_tasks: '{{zookeeper_init_system|default(systemd)}}.yml'
