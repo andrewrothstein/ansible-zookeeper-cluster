@@ -14,7 +14,7 @@
 - name: systemctl daemon-reload
   become: yes
   become_user: root
-  when: zookeeper_service_installed|changed and zookeeper_launch
+  when: zookeeper_service_installed is changed and zookeeper_launch
   command: systemctl daemon-reload
 
 - name: launch zookeeper...

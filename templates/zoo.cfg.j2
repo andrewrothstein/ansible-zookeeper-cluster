@@ -1,39 +1,46 @@
 # The number of milliseconds of each tick
 tickTime={{zookeeper_tick_time|default(2000)}}
-# The number of ticks that the initial 
+
+# The number of ticks that the initial
 # synchronization phase can take
 initLimit={{zookeeper_init_limit|default(10)}}
-# The number of ticks that can pass between 
+
+# The number of ticks that can pass between
 # sending a request and getting an acknowledgement
 syncLimit={{zookeeper_sync_limit|default(5)}}
+
 # the directory where the snapshot is stored.
 # do not use /tmp for storage, /tmp here is just 
 # example sakes.
 dataDir={{zookeeper_data_dir}}
 dataLogDir={{zookeeper_datalog_dir}}
+
 # the port at which the clients will connect
 clientPort={{zookeeper_client_port|default(2181)}}
+clientPortAddress={{zookeeper_client_port_address|default("0.0.0.0")}}
+
 # the maximum number of client connections.
 # increase this if you need to handle more clients
 maxClientCnxns={{zookeeper_max_client_cnxns|default(60)}}
-#
-# Be sure to read the maintenance section of the 
-# administrator guide before turning on autopurge.
-#
-# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
-#
+
 # The number of snapshots to retain in dataDir
-#autopurge.snapRetainCount=3
+autopurge.snapRetainCount={{zookeeper_autopurge_snapretaincount|default(3)}}
 # Purge task interval in hours
 # Set to "0" to disable auto purge feature
-#autopurge.purgeInterval=1
+autopurge.purgeInterval={{zookeeper_autopurge_purgeinterval|default(1)}}
 
-{% if not inventory_hostname in groups[zookeeper_quorum_group_name] %}
+{% if zookeeper_network.type == "static" %}
+{% if zookeeper_network.peer_type == "observer" %}
 peerType=observer
 {% endif %}
-
-{% for host in groups[zookeeper_group_name] %}
-
-server.{{hostvars[host]['zookeeper_myid']}}={% if zookeeper_use_ips %}{{hostvars[host]['ansible_' + zookeeper_network_iface]['ipv4']['address']}}{% else %}{{host}}{% endif %}:{{zookeeper_peer_port|default(2888)}}:{{zookeeper_election_port|default(3888)}}{% if not host in groups[zookeeper_quorum_group_name] %}:observer{% endif %}
-
+{% for peer in zookeeper_network.peers %}
+server.{{peer.id}}={{peer.peer}}:{{peer.port|default(2888)}}:{{peer.election_port|default(3888)}}{% if peer.type == "observer" %}:observer{% endif %}
 {% endfor %}
+{% else %}
+{% if not inventory_hostname in groups[zookeeper_network.quorum_group_name|default("zookeeper-quorum")] %}
+peerType=observer
+{% endif %}
+{% for host in groups[zookeeper_network.group_name|default("zookeeper")] %}
+server.{{hostvars[host]['zookeeper_myid']}}={% if zookeeper_network.use_ips %}{{hostvars[host]['ansible_' + zookeeper_network.iface]['ipv4']['address']}}{% else %}{{host}}{% endif %}:{{zookeeper_peer_port|default(2888)}}:{{zookeeper_election_port|default(3888)}}{% if not host in groups[zookeeper_network.quorum_group_name] %}:observer{% endif %}
+{% endfor %}
+{% endif %}

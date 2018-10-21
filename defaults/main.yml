@@ -9,12 +9,26 @@ zookeeper_conf_subdir: conf
 zookeeper_data_subdir: data
 zookeeper_datalog_subdir: data-log
 zookeeper_max_client_cnxns: 60
+zookeeper_autopurge_snapretaincount: 3
+zookeeper_autopurge_purgeinterval: 1
 
-zookeeper_use_ips: False
-zookeeper_network_iface: eth0
+# example using a static network peer configuration
+#zookeeper_client_port_address: '127.0.0.1'
+#zookeeper_network:
+#  type: static
+#  peer_type: member
+#  peers:
+#    - id: 1
+#      peer: '127.0.0.1'
+#      type: member
 
-zookeeper_group_name: zookeeper
-zookeeper_quorum_group_name: zookeeper-quorum
+# example of using Ansible groups and groupvars
+zookeeper_network:
+  type: group
+  group_name: zookeeper
+  quorum_group_name: zookeeper-quorum
+  use_ips: False
+  iface: eth0
 
 zookeeper_init_system: systemd
 zookeeper_dir: /usr/local/zookeeper

@@ -2,4 +2,13 @@
 - hosts: all
   roles:
     - role: '{{playbook_dir}}'
+      zookeeper_myid: 1
+      zookeeper_client_port_address: '127.0.0.1'
+      zookeeper_network:
+        type: static
+        peer_type: member
+        peers:
+          - id: 1
+            peer: '127.0.0.1'
+            type: member
       zookeeper_launch: False

@@ -26,8 +26,8 @@ galaxy_info:
   galaxy_tags:
     - zookeeper
     - consensus
-    - distributed transaction processing
+    - cp
 
 dependencies:
   - role: andrewrothstein.zookeeper
-    version: v2.0.8
+    version: v2.0.10
