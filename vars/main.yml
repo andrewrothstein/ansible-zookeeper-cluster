@@ -1,4 +1,4 @@
 ---
-zookeeper_conf_dir : '{{zookeeper_dir}}/{{zookeeper_conf_subdir}}'
-zookeeper_data_dir : '{{zookeeper_dir}}/{{zookeeper_data_subdir}}'
-zookeeper_datalog_dir: '{{zookeeper_dir}}/{{zookeeper_datalog_subdir}}'
+zookeeper_conf_dir: '{{ zookeeper_dir }}/{{ zookeeper_conf_subdir }}'
+zookeeper_data_dir: '{{ zookeeper_dir }}/{{ zookeeper_data_subdir }}'
+zookeeper_datalog_dir: '{{ zookeeper_dir }}/{{ zookeeper_datalog_subdir }}'

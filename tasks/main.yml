@@ -3,24 +3,24 @@
   become: yes
   become_user: root
   file:
-    path: '{{zookeeper_data_dir}}'
+    path: '{{ zookeeper_data_dir }}'
     state: directory
     mode: 0700
-    
+
 - name: configure...
   become: yes
   become_user: root
   with_items:
     - f: zoo.cfg
-      d: '{{zookeeper_conf_dir}}'
+      d: '{{ zookeeper_conf_dir }}'
     - f: log4j.properties
-      d: '{{zookeeper_conf_dir}}'
+      d: '{{ zookeeper_conf_dir }}'
     - f: myid
-      d: '{{zookeeper_data_dir}}'
+      d: '{{ zookeeper_data_dir }}'
   template:
-    src: '{{item.f}}.j2'
-    dest: '{{item.d}}/{{item.f}}'
-    mode: '{{item.m|default("0644")}}'
+    src: '{{ item.f }}.j2'
+    dest: '{{ item.d }}/{{ item.f }}'
+    mode: '{{ item.m|default("0644") }}'
 
 - name: configurating init system
-  include_tasks: '{{zookeeper_init_system|default(systemd)}}.yml'
+  include_tasks: '{{ zookeeper_init_system|default(systemd) }}.yml'
