@@ -29,14 +29,14 @@ Example Inventory/Playbook
 inventory.ini
 ```ini
 [zookeeper]
+host0 zookeeper_myid=0
 host1 zookeeper_myid=1
 host2 zookeeper_myid=2
 host3 zookeeper_myid=3
 ....
-hostN zookeeper_myid=N
 
 [zookeeper-quorum]
-host[1:7]
+host[0:7]
 ```
 
 playbook.yml
