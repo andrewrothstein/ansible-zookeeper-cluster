@@ -6,7 +6,7 @@ After=network.target
 
 [Service]
 Type=simple
-EnvironmentFile=-{{java_path}}
+EnvironmentFile=-/usr/local/openjdk-jre/openjdk.env
 ExecStart={{zookeeper_dir}}/bin/zkServer.sh start-foreground
 Restart=on-failure
 
