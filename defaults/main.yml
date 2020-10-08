@@ -1,4 +1,5 @@
 ---
+java_path: /usr/local/openjdk/jdk-{{ openjdk_ver.major }}.{{ openjdk_ver.minor }}.{{ openjdk_ver.patch }}+{{ openjdk_ver.b }}-jre/openjdk.env
 zookeeper_tick_time: 2000
 zookeeper_init_limit: 10
 zookeeper_sync_limit: 5
