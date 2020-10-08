@@ -14,7 +14,6 @@ env:
 - OS=debian_stretch
 - OS=fedora_31
 - OS=fedora_32
-- OS=gentoo_latest
 - OS=ubi8_8.1
 - OS=ubi8_8.2
 - OS=ubuntu_bionic
