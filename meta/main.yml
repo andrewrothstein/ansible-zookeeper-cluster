@@ -33,4 +33,4 @@ galaxy_info:
     - cp
 dependencies:
   - role: andrewrothstein.zookeeper
-    version: v3.0.12
+    version: v3.1.0
